@@ -1,0 +1,9 @@
+# Token & API
+.env
+
+# Sever data
+roulette.json
+ticket.json
+
+# mac OS
+.DS_Store
