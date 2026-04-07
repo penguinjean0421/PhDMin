@@ -136,23 +136,30 @@ class TicketView(ui.View):
             view=CloseView()
         )
 
-
 class TicketSystem(commands.Cog):
-    """Cog for managing the ticket system setup and events."""
-
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @commands.command(name="setup")
     @commands.has_permissions(administrator=True)
     async def setup_ticket(self, ctx: commands.Context):
-        """Sends the initial ticket creation embed."""
-        embed = discord.Embed(
-            title="📩 문의 지원",
-            description="아래 버튼을 눌러 티켓을 생성하세요.",
-            color=discord.Color.blue()
-        )
+        # ... 기존 코드 ...
+        embed = discord.Embed(title="📩 문의 지원", description="아래 버튼을 눌러 티켓을 생성하세요.", color=discord.Color.blue())
         await ctx.send(embed=embed, view=TicketView())
+
+    # --- 여기에 추가된 answer 명령어 ---
+    @commands.command(name="answer")
+    @commands.has_permissions(administrator=True)
+    async def answer_ticket(self, ctx: commands.Context, *, content: str):
+        await ctx.message.delete()
+        embed = discord.Embed(
+            title="📢 상담원 답변",
+            description=content,
+            color=discord.Color.green(),
+            timestamp=ctx.message.created_at
+        )
+        embed.set_footer(text=f"담당자: {ctx.author.display_name}", icon_url=ctx.author.display_avatar.url)
+        await ctx.send(embed=embed)
 
 
 async def setup(bot: commands.Bot):

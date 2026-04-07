@@ -107,3 +107,6 @@ class Roulette(commands.Cog):
         current_time_slot = f"{now.date()}-{hour}"
         if is_scheduled and self.last_sent_hour != current_time_slot:
             config = self.load_full_config()
+
+async def setup(bot):
+    await bot.add_cog(Roulette(bot))
