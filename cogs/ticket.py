@@ -147,7 +147,6 @@ class TicketSystem(commands.Cog):
         embed = discord.Embed(title="📩 문의 지원", description="아래 버튼을 눌러 티켓을 생성하세요.", color=discord.Color.blue())
         await ctx.send(embed=embed, view=TicketView())
 
-    # --- 여기에 추가된 answer 명령어 ---
     @commands.command(name="answer")
     @commands.has_permissions(administrator=True)
     async def answer_ticket(self, ctx: commands.Context, *, content: str):
@@ -158,7 +157,6 @@ class TicketSystem(commands.Cog):
             color=discord.Color.green(),
             timestamp=ctx.message.created_at
         )
-        embed.set_footer(text=f"담당자: {ctx.author.display_name}", icon_url=ctx.author.display_avatar.url)
         await ctx.send(embed=embed)
 
 
